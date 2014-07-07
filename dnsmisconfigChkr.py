@@ -1,5 +1,5 @@
 ##################################################################
-# dnsmisconfigChkr.py                                                  #
+# dnsmisconfigChkr.py                                            #
 # description: checks if the domain has a dns misconfiguration   #
 # author: @shipcod3                                              #
 # reference: http://www.securityfocus.com/archive/1/486606       #

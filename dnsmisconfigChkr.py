@@ -16,8 +16,8 @@ try:
     ip_addr = socket.gethostbyaddr("localhost."+sys.argv[1])
     if ip_addr[0] == "localhost":
         print('  >> Vulnerable to DNS Misconfiguration which leads to Same-Site Scripting')
-    except socket.error:
-        print('  >> Not Vulnerable')   
+except socket.error:
+    print('  >> Not Vulnerable')   
     
 print "[==] Done checking for DNS Misconfiguration"
 time.sleep(3)

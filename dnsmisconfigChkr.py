@@ -7,11 +7,13 @@
 
 import sys, socket, time
 
-print "********************"
-print "* dnsmisconfigChkr *"
-print "* by: @shipcod3    *"
-print "********************\n"
-
+print """
+     _               _                  __ _       ___ _    _       
+  __| |_ _  ____ __ (_)___ __ ___ _ _  / _(_)__ _ / __| |_ | |___ _ 
+ / _` | ' \(_-< '  \| (_-</ _/ _ \ ' \|  _| / _` | (__| ' \| / / '_|
+ \__,_|_||_/__/_|_|_|_/__/\__\___/_||_|_| |_\__, |\___|_||_|_\_\_|  
+  by: @shipcod3                              |___/                     
+"""
 def usage():
      print("USAGE: python dnsmisconfigChkr.py host.com")  
 
@@ -20,14 +22,21 @@ def dnsmisconfig(argv):
         return usage()
     
     target = sys.argv[1]
-    print "[**] Checking localhost."+target+" for DNS Misconfiguration......"
-    print "[+]Resolving the host address"
-    try:
-        ip_addr = socket.gethostbyaddr("localhost."+target)
-        if ip_addr[0] == "localhost":
-            print('  >> Vulnerable to DNS Misconfiguration which leads to Same-Site Scripting')
-    except socket.error:
-        print('  >> Not Vulnerable')   
+    payloads = ['localhost', 'dev', 'dns']
+    
+    for payload in payloads:
+        print "[**] Checking "+payload+"."+target+" for DNS Misconfiguration......"
+        try:
+            print "[+]Resolving the host address " 
+            ip_addr = socket.gethostbyaddr(payload+"."+target)
+            print ip_addr[2]
+            if ip_addr[0] == "localhost":
+                print "  >> Vulnerable to DNS Misconfiguration which leads to Same-Site Scripting"
+            else:
+                print "  >> Not Vulnerable"
+        except socket.error:
+            print "  >>Host must be down!!"
+            print "  >> Not Vulnerable"
     time.sleep(3)    
     print "[==] Done checking for DNS Misconfiguration"
 

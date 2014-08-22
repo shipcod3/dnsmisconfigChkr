@@ -1,3 +1,5 @@
+#!usr/bin/env python
+
 ##################################################################
 # dnsmisconfigChkr.py                                            #
 # description: checks if the domain has a dns misconfiguration   #
